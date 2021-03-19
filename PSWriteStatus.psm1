@@ -44,21 +44,17 @@ function Write-Status {
          }
       } elseif ($Loading) {
          [int]$time = (New-TimeSpan -Start (Get-Date "01/01/1970") -End (Get-Date)).TotalSeconds
-         if (($time % 4) -eq 0) {
-            Write-Host "`r[|] $Text"  -NoNewline
-         }
-         else {
-            if (($time % 3) -eq 0) {
-               Write-Host "`r[/] $Text"  -NoNewline
-            }
-            else {
-               if (($time % 2) -eq 0) {
-                  Write-Host "`r[-] $Text"  -NoNewline
-               } else {
-                  Write-Host "`r[\] $Text"  -NoNewline
-               }
-            }
-         }
+         $timemod = ($time % 8)
+		 switch {
+		 	0 {Write-Host "`r[|] $Text"  -NoNewline}
+		 	1 {Write-Host "`r[/] $Text"  -NoNewline}
+		 	2 {Write-Host "`r[-] $Text"  -NoNewline}
+		 	3 {Write-Host "`r[\] $Text"  -NoNewline}
+		 	4 {Write-Host "`r[|] $Text"  -NoNewline}
+		 	5 {Write-Host "`r[/] $Text"  -NoNewline}
+		 	6 {Write-Host "`r[-] $Text"  -NoNewline}
+		 	7 {Write-Host "`r[\] $Text"  -NoNewline}
+		 }
       }
       else {
          Write-Host "[*] $Text" -NoNewline
