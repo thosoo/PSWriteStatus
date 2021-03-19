@@ -45,7 +45,7 @@ function Write-Status {
       } elseif ($Loading) {
          [int]$time = (New-TimeSpan -Start (Get-Date "01/01/1970") -End (Get-Date)).TotalSeconds
          $timemod = ($time % 8)
-		 switch {
+		 switch ($timemod){
 		 	0 {Write-Host "`r[|] $Text"  -NoNewline}
 		 	1 {Write-Host "`r[/] $Text"  -NoNewline}
 		 	2 {Write-Host "`r[-] $Text"  -NoNewline}
