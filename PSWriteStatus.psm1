@@ -31,9 +31,9 @@ function Write-Status {
       [Parameter(Mandatory=$true,
          ValueFromPipeline=$true)]
       [string]$Text,
-      [bool]$Done,
-      [bool]$Nok,
-      [bool]$Loading
+      [Switch]$Done,
+      [Switch]$Nok,
+      [Switch]$Loading
    )
    process{
       if ($Done) {
