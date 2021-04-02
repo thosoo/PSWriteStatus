@@ -33,13 +33,17 @@ function Write-Status {
       [string]$Text,
       [Switch]$Done,
       [Switch]$Nok,
-      [Switch]$Loading
+      [Switch]$Loading,
+      [Switch]$Attention
    )
    process{
       if ($Done) {
          if ($Nok) {
             Write-Host "`r[-] $Text"
-         }else {
+         }elseif($Attention){
+         	Write-Host "`r[!] $Text"
+         }
+         else{
             Write-Host "`r[+] $Text"
          }
       } elseif ($Loading) {
@@ -55,8 +59,9 @@ function Write-Status {
 		 	6 {Write-Host "`r[-] $Text"  -NoNewline}
 		 	7 {Write-Host "`r[\] $Text"  -NoNewline}
 		 }
-      }
-      else {
+      } elseif ($Attention) {
+      	 Write-Host "[!] $Text"
+      } else {
          Write-Host "[*] $Text" -NoNewline
       }
    }
